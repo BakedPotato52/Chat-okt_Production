@@ -11,6 +11,7 @@ const rateLimit = require("express-rate-limit");
 const morgan = require("morgan");
 const path = require("path");
 
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -48,7 +49,7 @@ app.use(limiter);
 app.use(morgan('combined'));
 
 // Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, 'client/build', 'index.html')));
+app.use(express.static(path.join(__dirname, '../client/build', 'index.html')));
 
 // Basic route to check API status
 // app.get("/", (req, res) => {
