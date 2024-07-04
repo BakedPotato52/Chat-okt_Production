@@ -48,7 +48,7 @@ app.use(limiter);
 app.use(morgan('combined'));
 
 // Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build', 'index.html')));
 
 // Basic route to check API status
 // app.get("/", (req, res) => {
