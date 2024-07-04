@@ -47,8 +47,24 @@ app.use(limiter);
 // Logging middleware
 app.use(morgan('combined'));
 
-// Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, 'client/build', 'index.html')));
+
+// --------------------------deployment------------------------------
+
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/client/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "client", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+
+// --------------------------deployment------------------------------
 
 // Basic route to check API status
 // app.get("/", (req, res) => {
