@@ -1,0 +1,38 @@
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"warn","message":"404 Not Found: /"}
+{"level":"error","message":"Not Found - /","stack":"🥞","url":"/"}
+{"level":"warn","message":"404 Not Found: /favicon.ico"}
+{"level":"error","message":"Not Found - /favicon.ico","stack":"🥞","url":"/favicon.ico"}
+{"level":"warn","message":"404 Not Found: /"}
+{"level":"error","message":"Not Found - /","stack":"🥞","url":"/"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"warn","message":"No token provided in authorization header"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"User authenticated: guest@example.com"}
+{"level":"info","message":"Chats retrieved for user 6676bb416dead894fff75286"}
+{"level":"info","message":"Messages retrieved for chat: 667bc5da0ecd253ac959e543 by user 6676bb416dead894fff75286"}
+{"level":"info","message":"User authenticated: kanakacharya52@gmail.com"}
+{"level":"info","message":"Chats retrieved for user 666e8c8bf607812606e715f8"}
+{"level":"info","message":"Messages retrieved for chat: 667bc5da0ecd253ac959e543 by user 666e8c8bf607812606e715f8"}
+{"level":"error","message":"Chat validation failed: chatName: Cast to string failed for value \"[ 'kanak' ]\" (type Array) at path \"chatName\"","stack":"🥞","url":"/api/chat"}
+{"level":"info","message":"Chats retrieved for user 666e8c8bf607812606e715f8"}
+{"level":"info","message":"Messages retrieved for chat: 667bc5da0ecd253ac959e543 by user 666e8c8bf607812606e715f8"}
+{"level":"info","message":"Messages retrieved for chat: 66728beebb7da2497a13e5a0 by user 666e8c8bf607812606e715f8"}
+{"level":"warn","message":"404 Not Found: /chats"}
+{"level":"error","message":"Not Found - /chats","stack":"🥞","url":"/chats"}
+{"level":"info","message":"Chats retrieved for user 666e8c8bf607812606e715f8"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"Chats retrieved for user 666e8c8bf607812606e715f8"}
+{"level":"info","message":"Messages retrieved for chat: 66728beebb7da2497a13e5a0 by user 666e8c8bf607812606e715f8"}
+{"level":"info","message":"Chats retrieved for user 666e8c8bf607812606e715f8"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
