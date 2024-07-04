@@ -27,9 +27,6 @@ app.use(helmet());
 // Enable CORS with specific origins
 app.use(cors({
     origin: [
-        "https://chat-okt.vercel.app",
-        "https://chat-okt-bakedpotato52s-projects.vercel.app",
-        "https://chat-okt-git-main-bakedpotato52s-projects.vercel.app",
         "http://localhost:3000"
     ],
     methods: ["GET", "POST"],
@@ -76,9 +73,6 @@ const io = require("socket.io")(server, {
     pingTimeout: 60000,
     cors: {
         origin: [
-            "https://chat-okt.vercel.app",
-            "https://chat-okt-bakedpotato52s-projects.vercel.app",
-            "https://chat-okt-git-main-bakedpotato52s-projects.vercel.app",
             "http://localhost:3000"
         ],
         credentials: true,
