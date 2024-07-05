@@ -24,3 +24,10 @@
 {"level":"error","message":"Not Found - /","stack":"🥞","url":"/"}
 {"level":"error","message":"Not Found - /","stack":"🥞","url":"/"}
 {"level":"error","message":"Not Found - /","stack":"🥞","url":"/"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}

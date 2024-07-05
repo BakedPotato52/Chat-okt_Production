@@ -18,23 +18,59 @@ const logger = winston.createLogger({
 // @route       POST /api/chats
 // @access      Protected
 const createChat = [
-    body('users').isArray({ min: 1 }).withMessage('Users array is required'),
-    body('chatName').not().isEmpty().withMessage('Chat name is required'),
+    body('userId').isArray({ min: 1 }).withMessage('Users array is required'),
     asyncHandler(async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { users, chatName } = req.body;
+        const { userId } = req.body;
 
-        const chat = await Chat.create({
-            users,
-            chatName,
+        if (!userId) {
+            console.log("UserId param not sent with request");
+            return res.sendStatus(400);
+        }
+
+        var isChat = await Chat.find({
+            isGroupChat: false,
+            $and: [
+                { users: { $elemMatch: { $eq: req.user._id } } },
+                { users: { $elemMatch: { $eq: userId } } },
+            ],
+        })
+            .populate("users", "-password")
+            .populate("latestMessage");
+
+        isChat = await User.populate(isChat, {
+            path: "latestMessage.sender",
+            select: "name pic email",
         });
 
-        logger.info(`Chat created: ${chat._id} by user ${req.user._id}`);
-        res.status(201).json(chat);
+        if (isChat.length > 0) {
+            res.send(isChat[0]);
+        } else {
+            {
+                var chatData = {
+                    chatName: "sender",
+                    isGroupChat: false,
+                    users: [req.user._id, userId],
+                };
+            }
+
+            try {
+                const newChat = await Chat.create(chatData);
+                const fullChat = await Chat.findOne({ _id: newChat._id }).populate(
+                    "users",
+                    "-password"
+                );
+                res.status(201).json(fullChat);
+                logger.info(`Chat created: ${newChat._id} by user ${req.user._id}`);
+            } catch (error) {
+                res.status(400);
+                throw new Error(error.message);
+            }
+        }
     })
 ];
 
@@ -44,7 +80,16 @@ const createChat = [
 const getChats = asyncHandler(async (req, res) => {
     const chats = await Chat.find({ users: { $in: [req.user._id] } })
         .populate("users", "-password")
-        .exec();
+        .populate("chatAdmin", "-password")
+        .populate("latestMessage")
+        .sort({ updatedAt: -1 })
+        .then(async (results) => {
+            results = await User.populate(results, {
+                path: "latestMessage.sender",
+                select: "name pic email",
+            });
+            res.status(200).send(results);
+        });
 
     if (!chats) {
         res.status(404);
@@ -75,12 +120,12 @@ const createGroupChat = [
                 chatName: name,
                 users: userArray,
                 isGroupChat: true,
-                groupAdmin: req.user,
+                chatAdmin: req.user,
             });
 
             const fullGroupChat = await Chat.findById(groupChat._id)
                 .populate("users", "-password")
-                .populate("groupAdmin", "-password");
+                .populate("chatAdmin", "-password");
 
             logger.info(`Group chat created: ${groupChat._id} by user ${req.user._id}`);
             res.status(200).json(fullGroupChat);
@@ -112,7 +157,7 @@ const renameGroup = [
                 { new: true }
             )
                 .populate("users", "-password")
-                .populate("groupAdmin", "-password");
+                .populate("chatAdmin", "-password");
 
             if (!updatedChat) {
                 return res.status(404).json({ message: "Chat Not Found" });
@@ -148,7 +193,7 @@ const removeFromGroup = [
                 { new: true }
             )
                 .populate("users", "-password")
-                .populate("groupAdmin", "-password");
+                .populate("chatAdmin", "-password");
 
             if (!removed) {
                 return res.status(404).json({ message: "Chat Not Found" });
@@ -184,7 +229,7 @@ const addToGroup = [
                 { new: true }
             )
                 .populate("users", "-password")
-                .populate("groupAdmin", "-password");
+                .populate("chatAdmin", "-password");
 
             if (!added) {
                 return res.status(404).json({ message: "Chat Not Found" });

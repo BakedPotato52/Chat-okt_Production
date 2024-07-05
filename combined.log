@@ -83,3 +83,25 @@
 {"level":"error","message":"Not Found - /","stack":"🥞","url":"/"}
 {"level":"warn","message":"404 Not Found: /"}
 {"level":"error","message":"Not Found - /","stack":"🥞","url":"/"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"info","message":"User authenticated: guest@example.com"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
