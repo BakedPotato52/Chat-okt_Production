@@ -145,30 +145,34 @@ function Sidebar({ fetchAgain }) {
                                     </div>
                                 )
                             ))
-                        ) : chats ? (
-                            chats.map((chat) => (
-                                <div
-                                    key={chat._id}
-                                    className={`flex items-center gap-4 p-4 rounded-lg transition-colors cursor-pointer ${selectedChat === chat ? 'bg-gray-200 dark:bg-gray-700' : 'bg-gray-100 dark:bg-gray-800'}`}
-                                    onClick={() => setSelectedChat(chat)}
-                                >
-                                    <Avatar className="h-10 w-10" />
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold">
-                                            {chat.name}
-                                            {getSender(loggedUser, chat.users)}
-                                        </h3>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                                            {chat.latestMessage && (
-                                                <Typography variant="body2">
-                                                    <b>{chat.latestMessage.sender.name}:</b> {chat.latestMessage.content.length > 50 ? chat.latestMessage.content.substring(0, 51) + '...' : chat.latestMessage.content}
-                                                </Typography>
-                                            )}
-                                        </p>
+                        ) : chats && Array.isArray(chats) ? (
+                            <div className="overflow-y">
+
+                                {chats.map((chat) => (
+                                    <div
+                                        key={chat._id}
+                                        className={`flex items-center gap-4 p-4 rounded-lg transition-colors cursor-pointer ${selectedChat === chat ? 'bg-gray-200 dark:bg-gray-700' : 'bg-gray-100 dark:bg-gray-800'}`}
+                                        onClick={() => setSelectedChat(chat)}
+                                    >
+                                        <Avatar className="h-10 w-10" />
+                                        <div className="flex-1">
+                                            <h3 className="font-semibold">
+                                                {chat.name}
+                                                {getSender(loggedUser, chat.users)}
+                                            </h3>
+                                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                                {chat.latestMessage && (
+                                                    <Typography variant="body2">
+                                                        <b>{chat.latestMessage.sender.name}:</b> {chat.latestMessage.content.length > 50 ? chat.latestMessage.content.substring(0, 51) + '...' : chat.latestMessage.content}
+                                                    </Typography>
+                                                )}
+                                            </p>
+                                        </div>
+                                        <span className="text-xs text-gray-400 dark:text-gray-500">2h</span>
                                     </div>
-                                    <span className="text-xs text-gray-400 dark:text-gray-500">2h</span>
-                                </div>
-                            ))
+                                ))}
+                            </div>
+
                         ) : (
                             <ChatLoading />
                         )}
