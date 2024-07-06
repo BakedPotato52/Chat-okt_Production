@@ -32,7 +32,6 @@ app.use(helmet.contentSecurityPolicy({
         defaultSrc: ["'self'"],
         imgSrc: ["'self'", "data:", "https://*.cloudinary.com/"],
         scriptSrc: ["'self'", "https://*.cloudinary.com/"],
-        styleSrc: ["'self'", "https://*.cloudinary.com/"],
     }
 }))
 
