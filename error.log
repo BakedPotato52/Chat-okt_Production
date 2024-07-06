@@ -37,3 +37,4 @@
 {"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
 {"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
 {"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
+{"level":"error","message":"Please provide all required fields","stack":"🥞","url":"/api/chat"}

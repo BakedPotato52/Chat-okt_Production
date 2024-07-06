@@ -20,7 +20,7 @@ import { getSender, getSenderFull } from "../config/ChatLogics";
 import ChatScroll from "./ChatScroll";
 import { PhoneIcon, SendIcon, VideoIcon } from "./Icons";
 
-const ENDPOINT = "https://chat-ok.onrender.com"; // -> After deployment
+const ENDPOINT = "http://localhost:5000"; // -> After deployment
 let socket, selectedChatCompare;
 
 function ChatConversation({ fetchAgain, setFetchAgain }) {
@@ -39,7 +39,8 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
         try {
             const config = {
                 headers: {
-                    Authorization: `Bearer ${user.token}`,
+                    "Content-type": "application/json",
+                    'Authorization': `Bearer ${user.token}`,
                 },
             };
 

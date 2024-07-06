@@ -26,11 +26,13 @@ function Sidebar({ fetchAgain }) {
         try {
             const config = {
                 headers: {
-                    Authorization: `Bearer ${user.token}`,
+                    "Content-type": "application/json",
+                    'Authorization': `Bearer ${user.token}`,
                 },
             };
             const { data } = await axios.get('/api/chat', config);
             setChats(data);
+            console.log(data)
         } catch (error) {
             console.log(error);
         }
@@ -53,6 +55,7 @@ function Sidebar({ fetchAgain }) {
 
     const handleSearch = async (query) => {
         setSearch(query);
+        console.log(query);
         if (!query) {
             setSearchResult([]);
             return;
@@ -62,26 +65,29 @@ function Sidebar({ fetchAgain }) {
             setLoading(true);
             const config = {
                 headers: {
-                    Authorization: `Bearer ${user.token}`,
+                    "Content-type": "application/json",
+                    'Authorization': `Bearer ${user.token}`,
                 },
             };
             const { data } = await axios.get(`/api/user?search=${query}`, config);
             setLoading(false);
             setSearchResult(data);
+            console.log(data);
         } catch (error) {
             toast.error("Failed to Load the Search Results", { position: "bottom-left" });
             setLoading(false);
         }
     };
 
-    const handleChat = async (userId) => {
+    const handleChat = async (userId, userName) => {
         try {
             const config = {
                 headers: {
-                    Authorization: `Bearer ${user.token}`
+                    "Content-type": "application/json",
+                    'Authorization': `Bearer ${user.token}`
                 }
             };
-            const { data } = await axios.post('/api/chat', { userId }, config);
+            const { data } = await axios.post('/api/chat', { userId, userName }, config);
 
             if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
             setSelectedChat(data);
@@ -125,7 +131,7 @@ function Sidebar({ fetchAgain }) {
                         </FormControl>
                     </div>
                     <div className="flex-grow overflow-y-auto h-[calc(100vh-128px)] px-4 space-y-4">
-                        {search && Array.isArray(search) ? (
+                        {search ? (
                             searchResult.map((user) => (
                                 loading ? (
                                     <Box key={user._id} display="flex" justifyContent="center" alignItems="center" height="100%">

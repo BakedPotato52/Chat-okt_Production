@@ -6,7 +6,7 @@ const User = require("../models/userModel");
 // @route       POST /api/chats
 // @access      Protected
 const createChat = asyncHandler(async (req, res) => {
-    const { users, chatName, chatAdmin } = req.body;
+    const { users, chatName } = req.body;
 
     if (!users || !users.length) {
         res.status(400);
@@ -15,8 +15,7 @@ const createChat = asyncHandler(async (req, res) => {
 
     const chats = await Chat.create({
         users,
-        chatName,
-        chatAdmin
+        chatName
     });
 
     res.status(201).json(chats);
