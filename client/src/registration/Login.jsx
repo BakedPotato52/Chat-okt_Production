@@ -65,7 +65,7 @@ const Login = () => {
             });
             setUser(data);
             localStorage.setItem("userInfo", JSON.stringify(data));
-            navigate("/chats", setTimeout(4000));
+            navigate("/chats");
         } catch (error) {
             toast.error(`Error Occurred! ${error.response.data.message}`, {
                 position: "bottom",

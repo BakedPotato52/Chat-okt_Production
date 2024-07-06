@@ -125,7 +125,7 @@ function Sidebar({ fetchAgain }) {
                         </FormControl>
                     </div>
                     <div className="flex-grow overflow-y-auto h-[calc(100vh-128px)] px-4 space-y-4">
-                        {search ? (
+                        {search && Array.isArray(search) ? (
                             searchResult.map((user) => (
                                 loading ? (
                                     <Box key={user._id} display="flex" justifyContent="center" alignItems="center" height="100%">
@@ -146,7 +146,7 @@ function Sidebar({ fetchAgain }) {
                                 )
                             ))
                         ) : chats && Array.isArray(chats) ? (
-                            <div className="overflow-y">
+                            <div className="overflow-y-scroll">
 
                                 {chats.map((chat) => (
                                     <div

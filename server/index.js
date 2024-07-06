@@ -7,8 +7,7 @@ const messageRouter = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const cors = require("cors");
 const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
-const morgan = require("morgan");
+
 const path = require("path");
 
 
@@ -18,17 +17,31 @@ dotenv.config();
 // Connect to the database
 connectDB();
 
+
+
 // Initialize Express app
 const app = express();
 
+// to accept URL-encoded data
+app.use(express.urlencoded({ extended: true }));
+
 // Security middleware to set various HTTP headers
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "https://*.cloudinary.com/"],
+        scriptSrc: ["'self'", "https://*.cloudinary.com/"],
+        styleSrc: ["'self'", "https://*.cloudinary.com/"],
+    }
+}))
 
 
 // Enable CORS with specific origins
 app.use(cors({
     origin: [
-        "http://localhost:3000"
+        "http://localhost:3000",
+        "http://localhost:3001"
     ],
     methods: ["GET", "POST"],
     credentials: true
@@ -37,16 +50,6 @@ app.use(cors({
 // Middleware to parse JSON requests
 app.use(express.json());
 
-// Rate limiting middleware to prevent abuse
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-    message: "Too many requests from this IP, please try again after 15 minutes"
-});
-app.use(limiter);
-
-// Logging middleware
-app.use(morgan('combined'));
 
 // --------------------------deployment------------------------------
 
@@ -89,7 +92,8 @@ const io = require("socket.io")(server, {
     pingTimeout: 60000,
     cors: {
         origin: [
-            "http://localhost:3000"
+            "http://localhost:3000",
+            "http://localhost:3001"
         ],
         credentials: true,
     },

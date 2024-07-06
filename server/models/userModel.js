@@ -13,7 +13,6 @@ const userSchema = mongoose.Schema({
         unique: true,
         trim: true,
         lowercase: true,
-        match: [/\S+@\S+\.\S+/, 'Please use a valid email address'],
     },
     password: {
         type: String,
@@ -37,12 +36,12 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 // Middleware to hash password before saving
 userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) {
+    if (!this.isModified) {
         next();
     }
 
     const salt = await bcrypt.genSalt(10);
-    this.password = bcrypt.hash(this.password, salt);
+    this.password = await bcrypt.hash(this.password, salt);
 });
 
 // Ensure email is indexed and unique

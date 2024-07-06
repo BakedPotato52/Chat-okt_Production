@@ -31,3 +31,9 @@
 {"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
 {"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
 {"level":"error","message":"Chat validation failed: chatAdmin: Cast to ObjectId failed for value \"false\" (type boolean) at path \"chatAdmin\" because of \"BSONError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
+{"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
+{"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
+{"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
+{"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
+{"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
