@@ -16,17 +16,21 @@ import { getSender } from '../config/ChatLogics';
 import avatar from '../avatar.png'; // Assuming you have a placeholder avatar image
 
 function ChatHeader() {
-
-
+    // useStates for handling notification & profile open
     const [notificationOpen, setNotificationOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
 
-    const { user, setSelectedChat, notification, setNotification } = ChatState();
+    // useNavigate to navigate through Pages
     const navigate = useNavigate();
+
+    // useRefs for getting the references 
     const notificationAnchorRef = useRef(null);
     const profileAnchorRef = useRef(null);
     const prevNotificationOpen = useRef(notificationOpen);
     const prevProfileOpen = useRef(profileOpen);
+
+    // Provides context 
+    const { user, setSelectedChat, notification, setNotification } = ChatState();
 
     const handleNotificationToggle = () => {
         setNotificationOpen((prevOpen) => !prevOpen);

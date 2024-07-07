@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
     Box,
     IconButton,
@@ -7,6 +7,7 @@ import {
     Avatar,
     Button,
     Input,
+    Tooltip,
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import axios from "axios";
@@ -14,16 +15,22 @@ import io from "socket.io-client";
 import { Player } from "lottie-react";
 import animationData from "../animations/typing.json";
 import ProfileModal from "./Modals/ProfileModal";
-import UpdateChatModal from "./Modals/UpdateChatModal";
 import { ChatState } from "../context/ChatProvider";
 import { getSender, getSenderFull } from "../config/ChatLogics";
-import ChatScroll from "./ChatScroll";
 import { PhoneIcon, SendIcon, VideoIcon } from "./Icons";
+import {
+    isLastMessage,
+    isSameSender,
+    isSameSenderMargin,
+    isSameUser,
+} from "../config/ChatLogics";
 
-const ENDPOINT = "http://localhost:5000"; // -> After deployment
+const ENDPOINT = "https://chat-ok.onrender.com/"; // -> After deployment Paste your website URL
 let socket, selectedChatCompare;
 
 function ChatConversation({ fetchAgain, setFetchAgain }) {
+
+    //State for Managing the messages
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const [newMessage, setNewMessage] = useState("");
@@ -31,8 +38,16 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
     const [typing, setTyping] = useState(false);
     const [istyping, setIsTyping] = useState(false);
 
+    // ChatState provides context
     const { selectedChat, setSelectedChat, user, notification, setNotification } = ChatState();
+    const messagesEndRef = useRef(null);
 
+    // It defines the smooth Scrolling of the ui
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
+
+    // Uses async function to fetch chats from the server side of the app
     const fetchMessages = async () => {
         if (!selectedChat || !selectedChat._id) return;
 
@@ -57,6 +72,7 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
         }
     };
 
+    //It uses async function to send messages to the DATABASE
     const sendMessage = async (event) => {
         event.preventDefault();
         if (newMessage && selectedChat && selectedChat._id) {
@@ -81,6 +97,7 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
         }
     };
 
+    // It uses useEffect to listen to the socket connection
     useEffect(() => {
         socket = io(ENDPOINT);
         socket.emit("setup", user);
@@ -95,6 +112,7 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
         };
     }, [user]);
 
+    // It uses useEffect to select and fetch Messages for the server
     useEffect(() => {
         if (selectedChat && selectedChat._id) {
             fetchMessages();
@@ -103,6 +121,7 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
         // eslint-disable-next-line
     }, [selectedChat]);
 
+    // It uses useEffect to Receive messages for the socet io connection
     useEffect(() => {
         socket.on("message received", (newMessageReceived) => {
             if (
@@ -122,6 +141,7 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
         // eslint-disable-next-line
     }, [messages, notification, fetchAgain, setFetchAgain]);
 
+    // It provides the typing animation when the user is typing on the input message
     const typingHandler = (e) => {
         setNewMessage(e.target.value);
 
@@ -148,15 +168,20 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
             {selectedChat ? (
                 <>
                     <nav className="flex flex-1 flex-col text-3xl md:text-2xl">
-                        <div className="border-b p-4">
+                        <div className="border-b p-2">
                             <div className="flex items-center gap-4">
-                                <ProfileModal user={user}>
-                                    <Avatar className="border">
-                                        <Avatar src={user.pic} />
-                                    </Avatar>
-                                    <div>
-                                        <h2 className="text-lg font-medium">{user.name}</h2>
-                                        <p className="text-xs text-muted-foreground">Active 2 hours ago</p>
+                                <IconButton onClick={() => setSelectedChat(null)}>
+                                    <ArrowBack />
+                                </IconButton>
+                                <ProfileModal user={getSenderFull(user, selectedChat.users)} >
+                                    <div className="flex flex-row items-center">
+                                        <Avatar className="border mr-2">
+                                            <Avatar src={getSender(user, selectedChat.users.pic)} />
+                                        </Avatar>
+                                        <div>
+                                            <h2 className="text-lg font-medium">{getSender(user, selectedChat.users)}</h2>
+                                            <p className="text-xs text-muted-foreground">Active 2 hours ago</p>
+                                        </div>
                                     </div>
                                 </ProfileModal>
                                 <div className="ml-auto flex items-center gap-2">
@@ -171,36 +196,37 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                                 </div>
                             </div>
                         </div>
-                        <IconButton onClick={() => setSelectedChat(null)}>
-                            <ArrowBack />
-                        </IconButton>
-                        {messages && selectedChat.users && selectedChat.users.length > 0 && (!selectedChat.isGroupChat ? (
-                            <>
-                                {getSender(user, selectedChat.users)}
-                                <ProfileModal user={getSenderFull(user, selectedChat.users)} />
-                            </>
-                        ) : (
-                            <>
-                                {selectedChat.chatName.toUpperCase()}
-                                <UpdateChatModal
-                                    fetchMessages={fetchMessages}
-                                    fetchAgain={fetchAgain}
-                                    setFetchAgain={setFetchAgain}
-                                />
-                            </>
-                        ))}
                     </nav>
-                    <div className="relative flex-1 overflow-y-auto p-4">
-                        <div className="grid gap-4 pb-16"> {/* Added padding to avoid overlap */}
+                    <div className="relative flex-1 overflow-y-scroll p-2">
+                        <div className="grid gap-4 pb-6"> {/* Added padding to avoid overlap */}
                             {loading ? (
                                 <Box display="flex" justifyContent="center" alignItems="center" height="100%">
                                     <CircularProgress size={40} />
                                 </Box>
                             ) : (
-                                <div className="flex-1 overflow-y-auto p-4">
-                                    <div className="grid gap-4">
-                                        <ChatScroll messages={messages} />
-                                    </div>
+                                <div className="h-full overflow-y-scroll p-2">
+                                    {messages &&
+                                        messages.map((m, i) => (
+                                            <div className="flex items-center" key={m._id}>
+                                                {(isSameSender(messages, m, i, user._id) || isLastMessage(messages, i, user._id)) && (
+                                                    <Tooltip title={m.sender.name} placement="bottom-start" arrow>
+                                                        <Avatar
+                                                            sx={{ mt: "7px", mr: 1, cursor: "pointer" }}
+                                                            alt={m.sender.name}
+                                                            src={m.sender.pic}
+                                                        />
+                                                    </Tooltip>
+                                                )}
+                                                <span
+                                                    className={`${m.sender._id === user._id ? "bg-blue-100" : "bg-green-100"
+                                                        } ml-${isSameSenderMargin(messages, m, i, user._id)} ${isSameUser(messages, m, i, user._id) ? "mt-3" : "mt-10"
+                                                        } rounded-2xl px-5 py-1 max-w-3/4 break-words`}
+                                                >
+                                                    {m.content}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    <div ref={messagesEndRef} />
                                 </div>
                             )}
                             {istyping && (
@@ -214,8 +240,8 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                                 </div>
                             )}
                         </div>
-                        <div className="absolute bottom-0 left-0 right-0 border-t bg-white p-3"> {/* Updated to fixed position */}
-                            <form className="flex w-full items-center space-x-2" onSubmit={sendMessage}>
+                        <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-3"> {/* Updated to fixed position */}
+                            <form className="flex  items-center space-x-2" onSubmit={sendMessage}>
                                 <Input
                                     id="message"
                                     placeholder="Type your message..."

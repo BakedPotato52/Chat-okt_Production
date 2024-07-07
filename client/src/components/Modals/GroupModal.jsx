@@ -113,7 +113,8 @@ const GroupModal = ({ children }) => {
         try {
             const config = {
                 headers: {
-                    Authorization: `Bearer ${user.token}`,
+                    "Content-type": "application/json",
+                    'Authorization': `Bearer ${user.token}`,
                 },
             };
 
@@ -142,8 +143,6 @@ const GroupModal = ({ children }) => {
                     `/api/chat`,
                     {
                         users: selectedUsers.map((u) => u._id), // Ensure user IDs are sent correctly
-                        chatName: selectedUsers.map((u) => u.name),
-
                     },
                     config
                 );

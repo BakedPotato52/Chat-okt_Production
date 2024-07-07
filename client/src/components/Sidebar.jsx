@@ -79,7 +79,7 @@ function Sidebar({ fetchAgain }) {
         }
     };
 
-    const handleChat = async (userId, userName) => {
+    const handleChat = async (userId) => {
         try {
             const config = {
                 headers: {
@@ -87,10 +87,11 @@ function Sidebar({ fetchAgain }) {
                     'Authorization': `Bearer ${user.token}`
                 }
             };
-            const { data } = await axios.post('/api/chat', { userId, userName }, config);
+            const { data } = await axios.post('/api/chat', { userId }, config);
 
             if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
             setSelectedChat(data);
+            console.log(data);
             navigate('/chat');
         } catch (error) {
             toast.error("Failed to start the chat", { position: "bottom-left" });
