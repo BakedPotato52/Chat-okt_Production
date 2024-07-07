@@ -10,14 +10,11 @@ const helmet = require("helmet");
 
 const path = require("path");
 
-
 // Load environment variables from .env file
 dotenv.config();
 
 // Connect to the database
 connectDB();
-
-
 
 // Initialize Express app
 const app = express();
@@ -28,12 +25,12 @@ app.use(express.urlencoded({ extended: true }));
 // Security middleware to set various HTTP headers
 app.use(helmet());
 
-
 // Enable CORS with specific origins
 app.use(cors({
     origin: [
         "http://localhost:3000",
-        "http://localhost:3001"
+        "http://localhost:5000",
+        "https://chat-ok.onrender.com"
     ],
     methods: ["GET", "POST"],
     credentials: true
@@ -41,7 +38,6 @@ app.use(cors({
 
 // Middleware to parse JSON requests
 app.use(express.json());
-
 
 // --------------------------deployment------------------------------
 
@@ -85,7 +81,8 @@ const io = require("socket.io")(server, {
     cors: {
         origin: [
             "http://localhost:3000",
-            "http://localhost:3001"
+            "http://localhost:5000",
+            "https://chat-ok.onrender.com",
         ],
         credentials: true,
     },

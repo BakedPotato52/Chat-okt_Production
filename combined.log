@@ -175,3 +175,7 @@
 {"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-02.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
 {"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
 {"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-01.jmfthol.mongodb.net\u001b[39m\u001b[24m"}
+{"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
+{"level":"info","message":"\u001b[4m\u001b[36mMongoDB Connected: ac-vv8jtqe-shard-00-00.jmfthol.mongodb.net\u001b[39m\u001b[24m"}

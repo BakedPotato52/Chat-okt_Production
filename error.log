@@ -60,3 +60,4 @@
 {"level":"error","message":"Please provide all the required fields","stack":"🥞","url":"/api/chat"}
 {"level":"error","message":"Please provide all the required fields","stack":"🥞","url":"/api/chat"}
 {"level":"error","message":"Chat validation failed: users.1: Cast to [ObjectId] failed for value \"[\\n' +\n  \"  new ObjectId('6688eda3aa9f561f4064e6cd'),\\n\" +\n  \"  [ '6688e31b5ee1ece399abd5ae', '6688e55949114b0c8446b711' ]\\n\" +\n  ']\" (type string) at path \"users.1\" because of \"CastError\"","stack":"🥞","url":"/api/chat"}
+{"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
