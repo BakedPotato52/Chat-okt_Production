@@ -22,10 +22,24 @@ const app = express();
 // to accept URL-encoded data
 app.use(express.urlencoded({ extended: true }));
 
+
+// Define CSP policy
+const cspDirectives = {
+    directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "https://images.app.goo.gl", "https://avatars.githubusercontent.com"],
+        connectSrc: ["'self'", "https://chat-app-server-mege.onrender.com"]
+    }
+};
+
+// Use Helmet with the specified CSP policy
 // Security middleware to set various HTTP headers
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: cspDirectives }));
+
+// Security middleware to set various HTTP headers
 
 // Enable CORS with specific origins
+// Use CORS middleware to allow cross-origin requests
 app.use(cors({
     origin: [
         "http://localhost:3000",
