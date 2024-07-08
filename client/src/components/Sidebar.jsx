@@ -92,7 +92,7 @@ function Sidebar({ fetchAgain }) {
             if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
             setSelectedChat(data);
             console.log(data);
-            navigate('/chat');
+            navigate('/chats');
         } catch (error) {
             toast.error("Failed to start the chat", { position: "bottom-left" });
         }
@@ -152,7 +152,7 @@ function Sidebar({ fetchAgain }) {
                                     </div>
                                 )
                             ))
-                        ) : chats && Array.isArray(chats) ? (
+                        ) : chats ? (
                             <div className="overflow-y-scroll">
 
                                 {chats.map((chat) => (

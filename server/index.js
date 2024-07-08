@@ -19,22 +19,20 @@ connectDB();
 // Initialize Express app
 const app = express();
 
-// to accept URL-encoded data
-app.use(express.urlencoded({ extended: true }));
-
-
 // Define CSP policy
 const cspDirectives = {
     directives: {
         defaultSrc: ["'self'"],
-        imgSrc: ["'self'", "data:", "https://images.app.goo.gl", "https://avatars.githubusercontent.com"],
-        connectSrc: ["'self'", "https://chat-app-server-mege.onrender.com"]
+        imgSrc: ["'self'", "data:", "https://images.app.goo.gl", "https://avatars.githubusercontent.com", "https://icon-library.com/"],
+        connectSrc: ["'self'", "https://chat-ok.onrender.com"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://chat-ok.onrender.com"]
     }
 };
 
 // Use Helmet with the specified CSP policy
 // Security middleware to set various HTTP headers
-app.use(helmet({ contentSecurityPolicy: cspDirectives }));
+app.use(helmet.contentSecurityPolicy(cspDirectives));
 
 // Security middleware to set various HTTP headers
 
@@ -72,9 +70,9 @@ if (process.env.NODE_ENV === "production") {
 // --------------------------deployment------------------------------
 
 // Basic route to check API status
-// app.get("/", (req, res) => {
-//     res.send("API Running!");
-// });
+app.get("/", (req, res) => {
+    res.send("API Running!");
+});
 
 // Mount routers
 app.use("/api/user", userRouter);
