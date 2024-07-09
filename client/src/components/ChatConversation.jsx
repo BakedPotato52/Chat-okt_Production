@@ -25,7 +25,7 @@ import {
     isSameUser,
 } from "../config/ChatLogics";
 
-const ENDPOINT = "https:chat-ok.onrender.com"; // -> After deployment Paste your website URL
+const ENDPOINT = "https://chat-ok.onrender.com"; // -> After deployment Paste your website URL
 let socket, selectedChatCompare;
 
 function ChatConversation({ fetchAgain, setFetchAgain }) {

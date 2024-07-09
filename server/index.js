@@ -70,9 +70,9 @@ if (process.env.NODE_ENV === "production") {
 // --------------------------deployment------------------------------
 
 // Basic route to check API status
-app.get("/", (req, res) => {
-    res.send("API Running!");
-});
+// app.get("/", (req, res) => {
+//     res.send("API Running!");
+// });
 
 // Mount routers
 app.use("/api/user", userRouter);
