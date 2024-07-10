@@ -24,6 +24,7 @@ import {
     isSameSenderMargin,
     isSameUser,
 } from "../config/ChatLogics";
+import './Sidebar.css'
 
 const ENDPOINT = "https://chat-ok.onrender.com"; // -> After deployment Paste your website URL
 let socket, selectedChatCompare;
@@ -44,7 +45,9 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
 
     // It defines the smooth Scrolling of the ui
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
     }, [messages]);
 
     // Uses async function to fetch chats from the server side of the app
@@ -168,10 +171,10 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
             {selectedChat ? (
                 <>
                     <nav className="flex flex-col text-3xl md:text-2xl">
-                        <div className="border-b p-2">
+                        <div className="border-b border-[#9DB2BF] p-2 bg-[#526D82] text-[#DDE6ED]">
                             <div className="flex items-center gap-4">
                                 <IconButton onClick={() => setSelectedChat(null)}>
-                                    <ArrowBack />
+                                    <ArrowBack className="text-[#DDE6ED]" />
                                 </IconButton>
                                 <ProfileModal user={getSenderFull(user, selectedChat.users)}>
                                     <div className="flex items-center">
@@ -180,31 +183,31 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                                         </Avatar>
                                         <div>
                                             <h2 className="text-lg font-medium">{getSender(user, selectedChat.users)}</h2>
-                                            <p className="text-xs text-muted-foreground">Active 2 hours ago</p>
+                                            <p className="text-sm text-[#9DB2BF]">Active 2 hours ago</p>
                                         </div>
                                     </div>
                                 </ProfileModal>
                                 <div className="ml-auto flex items-center gap-2">
                                     <Button variant="ghost" size="icon">
-                                        <PhoneIcon className="h-5 w-5" />
+                                        <PhoneIcon className="h-5 w-5 text-[#DDE6ED]" />
                                         <span className="sr-only">Call</span>
                                     </Button>
                                     <Button variant="ghost" size="icon">
-                                        <VideoIcon className="h-5 w-5" />
+                                        <VideoIcon className="h-5 w-5 text-[#DDE6ED]" />
                                         <span className="sr-only">Video Call</span>
                                     </Button>
                                 </div>
                             </div>
                         </div>
                     </nav>
-                    <div className="relative flex-1 overflow-y-scroll p-2">
-                        <div className="grid gap-4 pb-6"> {/* Added padding to avoid overlap */}
+                    <div className="relative flex-1 overflow-y p-2 bg-[#27374D] text-[#DDE6ED]">
+                        <div className="grid gap-4 pb-14">
                             {loading ? (
                                 <Box display="flex" justifyContent="center" alignItems="center" height="100%">
                                     <CircularProgress size={40} />
                                 </Box>
                             ) : (
-                                <div className="h-full overflow-y-scroll p-2">
+                                <div className="overflow-y-auto h-[86.5vh] custom-scrollbar">
                                     {messages && messages.map((m, i) => (
                                         <div className="flex items-center" key={m._id}>
                                             {(isSameSender(messages, m, i, user._id) || isLastMessage(messages, i, user._id)) && (
@@ -217,7 +220,7 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                                                 </Tooltip>
                                             )}
                                             <span
-                                                className={`${m.sender._id === user._id ? "bg-blue-100" : "bg-green-100"} ml-${isSameSenderMargin(messages, m, i, user._id)} ${isSameUser(messages, m, i) ? "mt-3" : "mt-10"} rounded-2xl px-5 py-1 max-w-3/4 break-words`}
+                                                className={`${m.sender._id === user._id ? "bg-red-300 text-[#27374D]" : "bg-[#3386ca] text-[#27374D]"} ml-${isSameSenderMargin(messages, m, i, user._id)} ${isSameUser(messages, m, i) ? "mt-3" : "mt-10"} rounded-2xl px-5 py-1 max-w-3/4 break-words`}
                                             >
                                                 {m.content}
                                             </span>
@@ -226,29 +229,30 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                                     <div ref={messagesEndRef} />
                                 </div>
                             )}
-                            {istyping && (
-                                <div className="mb-2 ml-0">
-                                    <Player
-                                        autoplay
-                                        loop
-                                        src={animationData}
-                                        style={{ height: 70, width: 70 }}
-                                    />
-                                </div>
-                            )}
+
                         </div>
-                        <div className="fixed bottom-0 w-auto  right-0 border-t bg-white p-3">
+                        <div className="fixed left-[20%] bottom-0 max-w-full right-0 rounded-full border-t border-[#9DB2BF] bg-[#ffffff] p-3">
                             <form className="flex items-center justify-center max-w-full space-x-2" onSubmit={sendMessage}>
+                                {istyping && (
+                                    <div className="mb-2 ml-0">
+                                        <Player
+                                            autoplay
+                                            loop
+                                            src={animationData}
+                                            style={{ height: 70, width: 70 }}
+                                        />
+                                    </div>
+                                )}
                                 <Input
                                     id="message"
                                     placeholder="Type your message..."
-                                    className="flex-1"
+                                    className="flex-1  text-zinc-400"
                                     autoComplete="off"
                                     value={newMessage}
                                     onChange={typingHandler}
                                 />
                                 <Button type="submit" size="icon">
-                                    <SendIcon className="h-5 w-5" />
+                                    <SendIcon className="h-5 w-5 text-[#2f7fc0]" />
                                     <span className="sr-only">Send</span>
                                 </Button>
                             </form>
@@ -256,13 +260,14 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                     </div>
                 </>
             ) : (
-                <div className="flex h-full justify-center items-center text-center px-5">
+                <div className="flex h-full justify-center bg-[#27374D] items-center text-center px-5 text-[#DDE6ED]">
                     <Typography variant="h4">
                         Click on a user to start chatting
                     </Typography>
                 </div>
             )}
         </>
+
 
     );
 }

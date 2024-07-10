@@ -11,6 +11,7 @@ import { getSender } from '../config/ChatLogics';
 import { Textarea } from '@mui/joy';
 import ChatHeader from './ChatHeader';
 import { useNavigate } from 'react-router-dom';
+import './Sidebar.css'
 
 function Sidebar({ fetchAgain }) {
     const searchInputRef = useRef(null);
@@ -101,16 +102,15 @@ function Sidebar({ fetchAgain }) {
     return (
         <>
             <div className='flex flex-row'>
-
                 <div className="max-sm:hidden">
                     <ChatHeader />
                 </div>
-                <div className="flex flex-col h-screen border-r-2 bg-white dark:bg-gray-900">
-                    <div className="border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between">
-                        <h2 className="text-lg font-semibold">Chats</h2>
+                <div className="flex flex-col h-screen border-r-2 bg-[#27374D] dark:bg-[#526D82]">
+                    <div className="border-b border-[#9DB2BF] dark:border-[#DDE6ED] px-6 py-4 flex items-center justify-between">
+                        <h2 className="text-lg font-semibold text-[#DDE6ED]">Chats</h2>
                         <GroupModal>
                             <Button variant="ghost" size="icon">
-                                <PlusIcon className="h-5 w-5" />
+                                <PlusIcon className="h-5 w-5 text-[#DDE6ED]" />
                             </Button>
                         </GroupModal>
                     </div>
@@ -118,13 +118,13 @@ function Sidebar({ fetchAgain }) {
                         <FormControl fullWidth margin="normal">
                             <Textarea
                                 placeholder="Search"
-                                className="rounded-full px-8 py-2 text-sm"
+                                className="rounded-full px-8 py-2 text-sm bg-[#526D82] text-[#DDE6ED] placeholder-[#9DB2BF]"
                                 onChange={(e) => handleSearch(e.target.value)}
                                 inputprops={{
                                     endAdornment: (
                                         <InputAdornment position='end'>
                                             <IconButton>
-                                                <SearchIcon className="text-gray-400" />
+                                                <SearchIcon className="text-[#9DB2BF]" />
                                             </IconButton>
                                         </InputAdornment>
                                     ),
@@ -143,45 +143,43 @@ function Sidebar({ fetchAgain }) {
                                 ) : (
                                     <div
                                         key={user._id}
-                                        className="flex items-center gap-4 p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
+                                        className="flex items-center gap-4 p-2 cursor-pointer hover:bg-[#1B4242] dark:hover:bg-[#DDE6ED]"
                                         onClick={() => handleChat(user._id)}
                                     >
                                         <Avatar src={user.pic} className="h-10 w-10" />
                                         <div>
-                                            <h3 className="font-semibold">{user.name}</h3>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
+                                            <h3 className="font-semibold text-[#DDE6ED]">{user.name}</h3>
+                                            <p className="text-sm text-[#9DB2BF] dark:text-[#526D82]">{user.email}</p>
                                         </div>
                                     </div>
                                 )
                             ))
                         ) : chats ? (
-                            <div className="overflow-y-scroll">
-
+                            <div className="overflow-y">
                                 {chats.map((chat) => (
                                     <div
                                         key={chat._id}
-                                        className={`flex items-center gap-4 p-4 rounded-lg transition-colors cursor-pointer ${selectedChat === chat ? 'bg-gray-200 dark:bg-gray-700' : 'bg-gray-100 dark:bg-gray-800'}`}
+                                        className={`flex items-center gap-4 p-2 m-2 hover:bg-[#1B4242] transition-colors cursor-pointer ${selectedChat === chat ? ' bg-[#526D82] dark:bg-[#DDE6ED]' : ' dark:bg-[#27374D]'}`}
                                         onClick={() => setSelectedChat(chat)}
                                     >
                                         <Avatar className="h-10 w-10" />
                                         <div className="flex-1">
-                                            <h3 className="font-semibold">
+                                            <h3 className="font-semibold text-[#DDE6ED]">
                                                 {chat.name}
                                                 {getSender(loggedUser, chat.users)}
                                             </h3>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                            <p className="text-sm text-[#9DB2BF] dark:text-[#526D82]">
                                                 {chat.latestMessage && (
                                                     <Typography variant="body2">
-                                                        <b>{chat.latestMessage.sender.name}:</b> {chat.latestMessage.content.length > 50 ? chat.latestMessage.content.substring(0, 51) + '...' : chat.latestMessage.content}
+                                                        <p>{chat.latestMessage.sender.name}:</p> {chat.latestMessage.content.length > 50 ? chat.latestMessage.content.substring(0, 51) + '...' : chat.latestMessage.content}
                                                     </Typography>
                                                 )}
                                             </p>
                                         </div>
-                                        <span className="text-xs text-gray-400 dark:text-gray-500">2h</span>
+                                        <span className="text-xs text-[#9DB2BF] dark:text-[#526D82]">2h</span>
                                     </div>
                                 ))}
                             </div>
-
                         ) : (
                             <ChatLoading />
                         )}
@@ -189,6 +187,7 @@ function Sidebar({ fetchAgain }) {
                 </div>
                 <ToastContainer />
             </div>
+
 
         </>
     );

@@ -88,20 +88,23 @@ function ChatHeader() {
 
 
     return (
-        <header className="flex h-screen bg-zinc-100 select-none">
-            <nav className="flex flex-col items-center justify-between bg-background p-4 border-r">
+        <header className="flex h-screen bg-[#526D82] select-none">
+            <nav className="flex flex-col items-center justify-between bg-[#27374D] p-4 border-r border-[#9DB2BF]">
                 <div className="grid gap-4">
-
-                    <Link to={`/`} className='flex flex-col items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground'>
-                        <MessageSquareIcon className="h-6 w-6" />
+                    <Link to={`/`} className='flex flex-col items-center gap-1 text-sm font-medium text-[#DDE6ED] hover:text-[#9DB2BF]'>
+                        <MessageSquareIcon className="h-6 w-6 text-[#DDE6ED]" />
                     </Link>
-
                 </div>
 
                 <Stack direction="column" spacing={2} sx={{ mt: 'auto' }}>
                     <div>
-                        <IconButton ref={notificationAnchorRef} aria-controls={notificationOpen ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={handleNotificationToggle}>
-                            <FiBell className='text-gray-400' />
+                        <IconButton
+                            ref={notificationAnchorRef}
+                            aria-controls={notificationOpen ? 'menu-list-grow' : undefined}
+                            aria-haspopup="true"
+                            onClick={handleNotificationToggle}
+                        >
+                            <FiBell className='text-[#DDE6ED]' />
                         </IconButton>
                         <Popper open={notificationOpen} anchorEl={notificationAnchorRef.current} role={undefined} transition disablePortal>
                             {({ TransitionProps, placement }) => (
@@ -109,7 +112,7 @@ function ChatHeader() {
                                     {...TransitionProps}
                                     style={{ transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom' }}
                                 >
-                                    <Paper>
+                                    <Paper className="bg-[#526D82] text-[#DDE6ED] border border-[#9DB2BF]">
                                         <ClickAwayListener onClickAway={handleNotificationClose}>
                                             <MenuList autoFocusItem={notificationOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                                 {!notification.length && <MenuItem>No New Messages</MenuItem>}
@@ -150,14 +153,14 @@ function ChatHeader() {
                                     {...TransitionProps}
                                     style={{ transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom' }}
                                 >
-                                    <Paper>
+                                    <Paper className="bg-[#526D82] text-[#DDE6ED] border border-[#9DB2BF]">
                                         <ClickAwayListener onClickAway={handleProfileClose}>
                                             <MenuList autoFocusItem={profileOpen} id="composition-menu" aria-labelledby="composition-button" onKeyDown={handleListKeyDown}>
                                                 <ProfileModal user={user}>
-                                                    <MenuItem>Profile</MenuItem>
+                                                    <MenuItem className="hover:bg-[#9DB2BF]">Profile</MenuItem>
                                                 </ProfileModal>
-                                                <MenuItem onClick={handleProfileClose}>My account</MenuItem>
-                                                <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                                                <MenuItem className="hover:bg-[#9DB2BF]" onClick={handleProfileClose}>My account</MenuItem>
+                                                <MenuItem className="hover:bg-[#9DB2BF]" onClick={logoutHandler}>Logout</MenuItem>
                                             </MenuList>
                                         </ClickAwayListener>
                                     </Paper>
@@ -168,6 +171,7 @@ function ChatHeader() {
                 </Stack>
             </nav>
         </header>
+
     );
 }
 
