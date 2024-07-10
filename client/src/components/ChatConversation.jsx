@@ -167,16 +167,16 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
         <>
             {selectedChat ? (
                 <>
-                    <nav className="flex flex-1 flex-col text-3xl md:text-2xl">
+                    <nav className="flex flex-col text-3xl md:text-2xl">
                         <div className="border-b p-2">
                             <div className="flex items-center gap-4">
                                 <IconButton onClick={() => setSelectedChat(null)}>
                                     <ArrowBack />
                                 </IconButton>
-                                <ProfileModal user={getSenderFull(user, selectedChat.users)} >
-                                    <div className="flex flex-row items-center">
+                                <ProfileModal user={getSenderFull(user, selectedChat.users)}>
+                                    <div className="flex items-center">
                                         <Avatar className="border mr-2">
-                                            <Avatar src={getSender(user, selectedChat.users.pic)} />
+                                            <Avatar src={getSender(user, selectedChat.users).pic} />
                                         </Avatar>
                                         <div>
                                             <h2 className="text-lg font-medium">{getSender(user, selectedChat.users)}</h2>
@@ -205,27 +205,24 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                                 </Box>
                             ) : (
                                 <div className="h-full overflow-y-scroll p-2">
-                                    {messages &&
-                                        messages.map((m, i) => (
-                                            <div className="flex items-center" key={m._id}>
-                                                {(isSameSender(messages, m, i, user._id) || isLastMessage(messages, i, user._id)) && (
-                                                    <Tooltip title={m.sender.name} placement="bottom-start" arrow>
-                                                        <Avatar
-                                                            sx={{ mt: "7px", mr: 1, cursor: "pointer" }}
-                                                            alt={m.sender.name}
-                                                            src={m.sender.pic}
-                                                        />
-                                                    </Tooltip>
-                                                )}
-                                                <span
-                                                    className={`${m.sender._id === user._id ? "bg-blue-100" : "bg-green-100"
-                                                        } ml-${isSameSenderMargin(messages, m, i, user._id)} ${isSameUser(messages, m, i, user._id) ? "mt-3" : "mt-10"
-                                                        } rounded-2xl px-5 py-1 max-w-3/4 break-words`}
-                                                >
-                                                    {m.content}
-                                                </span>
-                                            </div>
-                                        ))}
+                                    {messages && messages.map((m, i) => (
+                                        <div className="flex items-center" key={m._id}>
+                                            {(isSameSender(messages, m, i, user._id) || isLastMessage(messages, i, user._id)) && (
+                                                <Tooltip title={m.sender.name} placement="bottom-start" arrow>
+                                                    <Avatar
+                                                        sx={{ mt: "7px", mr: 1, cursor: "pointer" }}
+                                                        alt={m.sender.name}
+                                                        src={m.sender.pic}
+                                                    />
+                                                </Tooltip>
+                                            )}
+                                            <span
+                                                className={`${m.sender._id === user._id ? "bg-blue-100" : "bg-green-100"} ml-${isSameSenderMargin(messages, m, i, user._id)} ${isSameUser(messages, m, i) ? "mt-3" : "mt-10"} rounded-2xl px-5 py-1 max-w-3/4 break-words`}
+                                            >
+                                                {m.content}
+                                            </span>
+                                        </div>
+                                    ))}
                                     <div ref={messagesEndRef} />
                                 </div>
                             )}
@@ -240,8 +237,8 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                                 </div>
                             )}
                         </div>
-                        <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-3"> {/* Updated to fixed position */}
-                            <form className="flex  items-center space-x-2" onSubmit={sendMessage}>
+                        <div className="fixed bottom-0 w-auto  right-0 border-t bg-white p-3">
+                            <form className="flex items-center justify-center max-w-full space-x-2" onSubmit={sendMessage}>
                                 <Input
                                     id="message"
                                     placeholder="Type your message..."
@@ -266,6 +263,7 @@ function ChatConversation({ fetchAgain, setFetchAgain }) {
                 </div>
             )}
         </>
+
     );
 }
 

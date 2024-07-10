@@ -1,4 +1,7 @@
-const PORT = process.env.PORT || 5000
-const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+const cors = require('cors');
 
-const io = require("socket.io")(server, { /* Socket.io configuration */ })
+app.use(cors({
+    origin: ["http://localhost:3000", "https://chat-ok.onrender.com"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));

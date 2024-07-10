@@ -63,3 +63,4 @@
 {"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
 {"level":"error","message":"Invalid email or password","stack":"🥞","url":"/api/user/login"}
 {"level":"error","message":"User already exists","stack":"🥞","url":"/api/user"}
+{"level":"error","message":"Unexpected non-whitespace character after JSON at position 13","stack":"🥞","url":"/api/chat/group"}

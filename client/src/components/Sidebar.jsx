@@ -102,8 +102,10 @@ function Sidebar({ fetchAgain }) {
         <>
             <div className='flex flex-row'>
 
-                <ChatHeader />
-                <div className="flex flex-col h-screen bg-white dark:bg-gray-900">
+                <div className="max-sm:hidden">
+                    <ChatHeader />
+                </div>
+                <div className="flex flex-col h-screen border-r-2 bg-white dark:bg-gray-900">
                     <div className="border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between">
                         <h2 className="text-lg font-semibold">Chats</h2>
                         <GroupModal>

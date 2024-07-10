@@ -1,11 +1,14 @@
 export const isSameSenderMargin = (messages, m, i, userId) => {
     // Check if the next message is from the same sender and the current message is not from the logged-in user
+    // console.log(i === messages.length - 1);
+    const returnN = 33
+    const returnM = 0
     if (
         i < messages.length - 1 &&
         messages[i + 1].sender._id === m.sender._id &&
         messages[i].sender._id !== userId
     )
-        return 33; // Apply a margin if true
+        return returnN; // Apply a margin if true
     // Check if the next message is from a different sender or it is the last message and the current message is not from the logged-in user
     else if (
         (i < messages.length - 1 &&
@@ -13,7 +16,7 @@ export const isSameSenderMargin = (messages, m, i, userId) => {
             messages[i].sender._id !== userId) ||
         (i === messages.length - 1 && messages[i].sender._id !== userId)
     )
-        return 0; // No margin if true
+        return returnM; // No margin if true
     else return "auto"; // Apply automatic margin otherwise
 };
 
